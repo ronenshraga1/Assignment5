@@ -14,6 +14,7 @@ public class BankAccountsBinarySearchTree extends BinarySearchTree<BankAccount>{
 		while (it.hasNext()){
 			list.add(it.next());
 		}
+		this.root = null;
 	    buildBalancedTree(list,0, list.size()-1);
 	}
 	    
