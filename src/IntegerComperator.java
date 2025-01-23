@@ -1,0 +1,2 @@
+public class IntegerComperator {
+}
