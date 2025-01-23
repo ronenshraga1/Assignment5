@@ -1,11 +1,17 @@
 
 public class FilterByBalance implements Filter<BankAccount>{
+	private int balanceThreshold;
 	public FilterByBalance(int balanceThreshold) {
-	    throw new UnsupportedOperationException("Remove this line");
+		this.balanceThreshold = balanceThreshold;
 	}
 	
 	@Override
 	public boolean accept(BankAccount element) {
-	    throw new UnsupportedOperationException("Remove this line");
+	    if(element.getBalance() >= this.balanceThreshold){
+			return true;
+		} else{
+			return false;
+		}
+
 	}
 }
