@@ -8,16 +8,46 @@ public class FilterIterator<T> implements Iterator<T> {
 	T next;
 	
 	public FilterIterator(Iterable<T> elements, Iterable<Filter<T>> filters) {
-	    throw new UnsupportedOperationException("Remove this line");
+		if (elements == null || filters == null) {
+			throw new IllegalArgumentException("elements are null");
+		}
+		this.iterator = elements.iterator();
+	    this.filters = filters;
+		next = findValid();
 	}
-	
+
 	@Override
 	public boolean hasNext() {
-	    throw new UnsupportedOperationException("Remove this line");
+	    return next != null;
 	}
 
 	@Override
 	public T next() {
-	    throw new UnsupportedOperationException("Remove this line");
+		if(!hasNext()){
+			throw new NoSuchElementException();
+		}
+		T element = next;
+		next = findValid();
+
+		return element;
+	}
+	private T findValid(){
+		while (iterator.hasNext()){
+			T element = iterator.next();
+			if(isValid(element)){
+				return element;
+			}
+		}
+		return null;
+	}
+	private boolean isValid(T element){
+		Iterator<Filter<T>> filtersIterator = filters.iterator();
+		while (filtersIterator.hasNext()){
+			Filter<T> filter = filtersIterator.next();
+			if(!filter.accept(element)){
+				return false;
+			}
+		}
+		return true;
 	}
 }
