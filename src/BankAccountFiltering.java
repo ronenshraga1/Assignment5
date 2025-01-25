@@ -1,6 +1,4 @@
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 public class BankAccountFiltering {
     public static List<BankAccount> getAllValidAccounts(Iterable<BankAccount> accounts, 

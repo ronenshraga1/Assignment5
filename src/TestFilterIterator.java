@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class TestFilterIterator {
@@ -14,6 +15,13 @@ public class TestFilterIterator {
 
         // Create a list of bank accounts
         List<BankAccount> accounts = Arrays.asList(account1, account2, account3, account4, account5);
+        Comparator<BankAccount> cmprtr = new AccountComparatorByNumber();
+        BinarySearchTree<BankAccount> bt = new BinarySearchTree<>(cmprtr);
+        bt.insert(account1);
+        bt.insert(account2);
+        bt.insert(account3);
+        bt.insert(account4);
+        bt.insert(account5);
 
         // Define filters
         Filter<BankAccount> balanceFilter = new FilterByBalance(1000);
@@ -21,10 +29,10 @@ public class TestFilterIterator {
 
         // Combine filters
         List<Filter<BankAccount>> filters = Arrays.asList(balanceFilter, accountNumberFilter);
-
+        System.out.println(BankAccountFiltering.getAllValidAccounts(bt,110,0,10));
         // Create the FilterIterator
         FilterIterator<BankAccount> filterIterator = new FilterIterator<>(accounts, filters);
-        System.out.println(BankAccountFiltering.getAllValidAccounts(accounts,1000,2,4));
+        System.out.println(BankAccountFiltering.getAllValidAccounts(accounts,110,0,10));
 
         // Test hasNext and next methods
 //        System.out.println("Filtered accounts:");
